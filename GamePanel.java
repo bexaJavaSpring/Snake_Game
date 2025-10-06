@@ -14,11 +14,9 @@ public class GamePanel extends JPanel implements ActionListener{
 	static final int UNIT_SIZE = 20;
 	static final int NUMBER_OF_UNITS = (WIDTH * HEIGHT) / (UNIT_SIZE * UNIT_SIZE);
 
-	// hold x and y coordinates for body parts of the snake
 	final int x[] = new int[NUMBER_OF_UNITS];
 	final int y[] = new int[NUMBER_OF_UNITS];
 	
-	// initial length of the snake
 	int length = 5;
 	int foodEaten;
 	int foodX;
@@ -41,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		addFood();
 		running = true;
 		
-		timer = new Timer(80, this);
+		timer = new Timer(150, this);
 		timer.start();	
 	}
 	
@@ -53,7 +51,6 @@ public class GamePanel extends JPanel implements ActionListener{
 	
 	public void move() {
 		for (int i = length; i > 0; i--) {
-			// shift the snake one unit to the desired direction to create a move
 			x[i] = x[i-1];
 			y[i] = y[i-1];
 		}
@@ -102,19 +99,17 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	public void addFood() {
-		foodX = random.nextInt((int)(WIDTH / UNIT_SIZE))*UNIT_SIZE;
-		foodY = random.nextInt((int)(HEIGHT / UNIT_SIZE))*UNIT_SIZE;
+		foodX = random.nextInt((WIDTH / UNIT_SIZE))*UNIT_SIZE;
+		foodY = random.nextInt((HEIGHT / UNIT_SIZE))*UNIT_SIZE;
 	}
 	
 	public void checkHit() {
-		// check if head run into its body
 		for (int i = length; i > 0; i--) {
 			if (x[0] == x[i] && y[0] == y[i]) {
 				running = false;
 			}
 		}
 		
-		// check if head run into walls
 		if (x[0] < 0 || x[0] > WIDTH || y[0] < 0 || y[0] > HEIGHT) {
 			running = false;
 		}
