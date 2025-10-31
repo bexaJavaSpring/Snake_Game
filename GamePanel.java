@@ -109,10 +109,18 @@ public class GamePanel extends JPanel implements ActionListener{
 				running = false;
 			}
 		}
-		
-		if (x[0] < 0 || x[0] > WIDTH || y[0] < 0 || y[0] > HEIGHT) {
-			running = false;
-		}
+
+        if (x[0] < 0) {
+            x[0] = WIDTH - UNIT_SIZE;
+        } else if (x[0] >= WIDTH) {
+            x[0] = 0;
+        }
+
+        if (y[0] < 0) {
+            y[0] = HEIGHT - UNIT_SIZE;
+        } else if (y[0] >= HEIGHT) {
+            y[0] = 0;
+        }
 		
 		if(!running) {
 			timer.stop();
